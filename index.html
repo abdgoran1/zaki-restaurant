@@ -430,7 +430,7 @@ footer{background:var(--charcoal);color:#eee;padding:70px 20px 30px}
     </div>
     <div>
       <h4 data-i18n="nav_contact">پەیوەندی</h4>
-      <p data-i18n="foot_call">پەیوەندی: <span dir="ltr">07505083805</span></p>
+      <p data-i18n="foot_call"><a href="https://wa.me/9647517316903" target="_blank" rel="noopener">پەیوەندی: <span dir="ltr">07517316903</span></a></p>
     </div>
   </div>
   <div class="copyright" data-i18n="copyright">© ٢٠٢٦ لەفەو گەسی یونس — هەموو مافەکان پارێزراون</div>
@@ -477,8 +477,8 @@ footer{background:var(--charcoal);color:#eee;padding:70px 20px 30px}
 
 <script>
 /* ==================== DATA ==================== */
-const TELEGRAM_USERNAME = 'mujahed_50';
-const TELEGRAM_URL = 'https://t.me/' + TELEGRAM_USERNAME;
+const WHATSAPP_NUMBER = '9647517316903';
+const WHATSAPP_URL = 'https://wa.me/' + WHATSAPP_NUMBER;
 
 const I18N = {
   ku: {
@@ -500,12 +500,12 @@ const I18N = {
     foot_loc_title:'شوێنەکەمان',
     foot_address:'جادەی ئیسکان بەرامبەر بەنزینخانەی هیوا',
     foot_maps:'کردنەوە لە گووگڵ مەپس',
-    foot_call:'پەیوەندی: <span dir="ltr">07505083805</span>',
+    foot_call:'پەیوەندی: <a href="https://wa.me/9647517316903" target="_blank" rel="noopener"> <span dir="ltr">07517316903</span></a>',
     copyright:'© ٢٠٢٦ لەفەو گەسی یونس — هەموو مافەکان پارێزراون',
     modal_salads:'زەڵاتەکان (بەخۆڕایی)', modal_sauces:'سۆسەکان (بەخۆڕایی)', modal_drinks:'خواردنەوەکان (هەڵبژاردە)',
-    modal_order:'داواکردن بە تێلەگرام',
-    modal_feedback:'تێلەگرام کراوە؛ تکایە داواکردنەکەت بنێرە. سوپاس!',
-    toast_order:'تێلەگرام کراوە بۆ تەواوکردنی داواکردنەکەت!'
+    modal_order:'داواکردن بە واتساپ',
+    modal_feedback:'واتساپ کراوە؛ تکایە داواکردنەکەت بنێرە. سوپاس!',
+    toast_order:'واتساپ کراوە بۆ تەواوکردنی داواکردنەکەت!'
   },
   ar: {
     brand:'لفات وكص يونس', preName:'لفات وكص يونس', preTag:'شاورما دجاج كردية',
@@ -526,12 +526,12 @@ const I18N = {
     foot_loc_title:'موقعنا',
     foot_address:'شارع إسكان أمام محطة وقود هيوا',
     foot_maps:'افتح في خرائط جوجل',
-    foot_call:'اتصال: <span dir="ltr">07505083805</span>',
+    foot_call:'اتصال: <a href="https://wa.me/9647517316903" target="_blank" rel="noopener"> <span dir="ltr">07517316903</span></a>',
     copyright:'© ٢٠٢٦ لفات وكص يونس — جميع الحقوق محفوظة',
     modal_salads:'السلطات (مجاناً)', modal_sauces:'الصلصات (مجاناً)', modal_drinks:'المشروبات (اختياري)',
-    modal_order:'اطلب عبر تليغرام',
-    modal_feedback:'تم فتح تليغرام؛ أرسل طلبك لإكماله. شكراً لك!',
-    toast_order:'تم فتح تليغرام لإكمال طلبك!'
+    modal_order:'اطلب عبر واتساب',
+    modal_feedback:'تم فتح واتساب؛ أرسل طلبك لإكماله. شكراً لك!',
+    toast_order:'تم فتح واتساب لإكمال طلبك!'
   },
   en: {
     brand:'Younis Shawarma', preName:'Younis Shawarma', preTag:'Kurdish Chicken Shawarma',
@@ -552,12 +552,12 @@ const I18N = {
     foot_loc_title:'Our Location',
     foot_address:'Iskan Street, Opposite Hiwa Gas Station',
     foot_maps:'Open in Google Maps',
-    foot_call:'Call: 07505083805',
+    foot_call:'Call: <a href="https://wa.me/9647517316903" target="_blank" rel="noopener">07517316903</a>',
     copyright:'© 2026 Younis Shawarma — All rights reserved',
     modal_salads:'Salads (Free)', modal_sauces:'Sauces (Free)', modal_drinks:'Drinks (Optional)',
-    modal_order:'Order via Telegram',
-    modal_feedback:'Telegram opened. Please send your order to complete it. Thank you!',
-    toast_order:'Telegram opened to complete your order!'
+    modal_order:'Order via WhatsApp',
+    modal_feedback:'WhatsApp opened. Please send your order to complete it. Thank you!',
+    toast_order:'WhatsApp opened to complete your order!'
   }
 };
 
@@ -845,7 +845,7 @@ document.getElementById('modalClose').addEventListener('click', closeModal);
 overlay.addEventListener('click', e=>{ if(e.target===overlay) closeModal(); });
 document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeModal(); });
 
-/* ==================== ORDER (Telegram) ==================== */
+/* ==================== ORDER (WhatsApp) ==================== */
 document.getElementById('orderBtn').addEventListener('click', ()=>{
   const t = I18N[LANG];
   const p = PRODUCTS[currentProduct];
@@ -859,7 +859,8 @@ document.getElementById('orderBtn').addEventListener('click', ()=>{
 ${t.sides_title}: ${chosenSides}`;
   if(chosenDrinks) msg += `
 ${t.drinks_title}: ${chosenDrinks}`;
-  window.open(TELEGRAM_URL, '_blank');
+  const whatsappMessage = encodeURIComponent(msg);
+  window.open(`${WHATSAPP_URL}?text=${whatsappMessage}`, '_blank', 'noopener');
   const fb = document.getElementById('orderFeedback');
   fb.classList.remove('show'); void fb.offsetWidth; fb.classList.add('show');
   showToast(t.toast_order);
